@@ -1,8 +1,6 @@
 ![image_002_0001](https://github.com/user-attachments/assets/ee17a28f-8d2b-439c-b850-c393dc160405)
 
 # Cross Hatching Effect Post Processing
-
-# Hatching Post Processing
 ![Unity Version](https://img.shields.io/badge/Unity-6000.0.58%36LTS%2B-blueviolet?logo=unity)
 ![Unity Pipeline Support (Built-In)](https://img.shields.io/badge/BiRP_❌-darkgreen?logo=unity)
 ![Unity Pipeline Support (URP)](https://img.shields.io/badge/URP_✔️-blue?logo=unity)
