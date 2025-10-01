@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Rendering.RenderGraphModule;
+using UnityEngine.Rendering.RenderGraphModule.Util;
 using UnityEngine.Rendering.Universal;
 
 //some of the rendering/blit code in Render() is based on IronStar's render feature code in https://github.com/BattleDawnNZ/Image-Effects-with-Shadergraph/blob/master/Assets/Renderer%20Feature/BlitPass.cs
@@ -10,14 +12,14 @@ public class HatchingPass : ScriptableRenderPass
 {
     static readonly string renderPassTag = "Hatching";
 
+    //volume for the hatching effect
+    private HatchingVolume hatchingVolume;
+
     //material containing the shader
     private Material HatchingMaterial;
-    // camera soruces/camera color targets
-    private RenderTargetIdentifier source;
-    private RenderTargetHandle dest;
 
-    //temporary color texture
-    RenderTargetHandle temporaryColorTexture;
+    //RTHandles
+    //RTHandle source;
 
     //initializes our variables
     public HatchingPass(RenderPassEvent evt, Material mat)
@@ -28,9 +30,9 @@ public class HatchingPass : ScriptableRenderPass
             Debug.LogError("No Hatching Material, Please input a material that has the hatching shader into the hatching effect's render feature setting");
             return;
         }
-
+        //to make profiling easier
+        profilingSampler = new ProfilingSampler(renderPassTag);
         HatchingMaterial = mat;
-        temporaryColorTexture.Init("_TemporaryColorTexture");
     }
 
     //where our rendering of the effect starts
@@ -50,40 +52,47 @@ public class HatchingPass : ScriptableRenderPass
             //Debug.LogError("Post Processing in Camera not enabled");
             return;
         }
-        //sets command buffer pool/CMD for rendering stuff
+        VolumeStack stack = VolumeManager.instance.stack;
+        hatchingVolume = stack.GetComponent<HatchingVolume>();
+
         var cmd = CommandBufferPool.Get(renderPassTag);
         Render(cmd, ref renderingData);
 
-        //releases the CMD for cleanup
         context.ExecuteCommandBuffer(cmd);
-        CommandBufferPool.Release(cmd);
-    }
+        cmd.Clear();
 
-    //sets up the camera color targets to our scripts's private variables of the camera targets
-    //x = original camera source, y = destination camera source
-    public void Setup(RenderTargetIdentifier x, RenderTargetHandle y)
-    {
-        source = x; //source
-        dest = y; //destination
+        CommandBufferPool.Release(cmd);
     }
 
     //helper method to contain all of our rendering code for the Execute() method
     void Render(CommandBuffer cmd, ref RenderingData renderingData)
     {
-        //modifies the cam data's depth buffer bits to 0
-        RenderTextureDescriptor opaqueDesc = renderingData.cameraData.cameraTargetDescriptor;
-        opaqueDesc.depthBufferBits = 0;
+        if (hatchingVolume.IsActive() == false) return;
+        hatchingVolume.load(HatchingMaterial, ref renderingData);
 
-        //all the blit work/rendering the effect onto the camera color targets/sources
-        cmd.GetTemporaryRT(temporaryColorTexture.id, opaqueDesc, FilterMode.Point);
-        Blit(cmd, source, temporaryColorTexture.Identifier(), HatchingMaterial, 0);
-        Blit(cmd, temporaryColorTexture.Identifier(), source);
+        //for profiling
+        using (new ProfilingScope(cmd, profilingSampler))
+        {
+            //actual rendering code
+            var src = renderingData.cameraData.renderer.cameraColorTargetHandle;
+
+            int width = renderingData.cameraData.cameraTargetDescriptor.width;
+            int height = renderingData.cameraData.cameraTargetDescriptor.height;
+
+            var tempColorTexture = RenderTexture.GetTemporary(width, height, 0, RenderTextureFormat.ARGB32);
+
+            //old code uses source variable instead of src
+            cmd.Blit(src, tempColorTexture, HatchingMaterial, 0);
+            cmd.Blit(tempColorTexture, src);
+
+            RenderTexture.ReleaseTemporary(tempColorTexture);
+        }
     }
 
-    //cleans up the temp color texture when is not needed to be used
-    public override void FrameCleanup(CommandBuffer cmd)
+    //sets up the camera color targets to our scripts's private variables of the camera targets
+    public void Setup(ScriptableRenderer renderer)
     {
-        if (dest == UnityEngine.Rendering.Universal.RenderTargetHandle.CameraTarget)
-            cmd.ReleaseTemporaryRT(temporaryColorTexture.id);
+        //old code
+        //source = renderer.cameraColorTargetHandle; //source
     }
 }

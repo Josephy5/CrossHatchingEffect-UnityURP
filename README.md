@@ -1,19 +1,24 @@
 ![image_002_0001](https://github.com/user-attachments/assets/ee17a28f-8d2b-439c-b850-c393dc160405)
 
+<<<<<<< Updated upstream
 # Cross Hatching Effect Post Processing
 ![Unity Version](https://img.shields.io/badge/Unity-2021.3%36LTS%2B-blueviolet?logo=unity)
+=======
+# Hatching Post Processing
+![Unity Version](https://img.shields.io/badge/Unity-6000.0.58%36LTS%2B-blueviolet?logo=unity)
+>>>>>>> Stashed changes
 ![Unity Pipeline Support (Built-In)](https://img.shields.io/badge/BiRP_❌-darkgreen?logo=unity)
 ![Unity Pipeline Support (URP)](https://img.shields.io/badge/URP_✔️-blue?logo=unity)
 ![Unity Pipeline Support (HDRP)](https://img.shields.io/badge/HDRP_❌-darkred?logo=unity)
  
-A hatching/cross-hatching post processing effect for Unity URP (2022.3.20f1) that I made for Serious Point Games as part of my studies in shader development.
+A hatching/cross-hatching post processing effect for Unity URP (6000.0.58f1) that I made for Serious Point Games as part of my studies in shader development.
 You can refer to the effect's documentation for more info (should be in the repo and its release as a PDF file).
 
 ## Features
 - Animated Hatchings
 - Ability to be displayed with screen color or black & white
 - Inverted hatching color
-- Texture array for Hatch textures
+- Uses texture array for Hatch textures (one texture array sample is provided for use with the effect)
 
 ## Example[s]
 ![image_001_0001](https://github.com/user-attachments/assets/59c9f9ca-150b-4724-b6aa-4625b542aa7d)
@@ -33,9 +38,6 @@ Inverted Hatching Color
 5. If needed, you can change the effect's render pass event in its render feature under settings.
 
 ## Credits/Assets used
-The code is based on IronStar Interactive's image effect shader. [GitHub Link](https://github.com/BattleDawnNZ/Image-Effects-with-Shadergraph) or [YouTube Video Link](https://www.youtube.com/watch?v=FpvJAG6R99k&t=6s)
-<br>
-<br>
-Texture Array script by Dmitry Denisov. [GitHub Link](https://github.com/DmtDenisov/Texture-Array-Unity). It comes included with the project but you don't have to use or depend on it, you can 
-make and use your own (or other ones). I only include this one as its the one that is most convenient for me and the one that I reference in the effect's documentation.
+The code is based on IronStar Interactive's image effect shader tutorial. It has since been modified to run on Unity 6/Unity 6000.0.58f1 
+Image-Effects-with-Shadergraph by BattleDawnNZ/IronStar Interactive ([GitHub Link](https://github.com/BattleDawnNZ/Image-Effects-with-Shadergraph) or [YouTube Video Link](https://www.youtube.com/watch?v=FpvJAG6R99k&t=6s)). No License found
 

@@ -9,14 +9,22 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Shader Graphs_Hatching
   m_Shader: {fileID: -6465566751694194690, guid: 2b3839d6ad1e9d34fa946832da9df1a1, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
+  m_CustomRenderQueue: 3000
+  stringTagMap:
+    RenderType: Transparent
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  - SHADOWCASTER
+  - DepthOnly
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -42,18 +50,52 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AlphaClip: 0
+    - _AlphaToMask: 0
     - _Animation_Cycles_Per_Second: 12
+    - _Blend: 0
+    - _CastShadows: 0
     - _Color_Intensity: 1
-    - _Extra_Brightness: 1
-    - _Extra_Brightness_Strength: 0.6
+    - _Cull: 2
+    - _DstBlend: 10
+    - _Extra_Brightness: 0
+    - _Extra_Brightness_Strength: 0.25
+    - _Extra_Fresnel_Power: 2
+    - _Extra_Fresnel_Tuning: 0.8
+    - _Float: 1
+    - _Float_1: 1
+    - _Fresnel_Power: 1
+    - _Fullscreen_AlphaBlendOperation: 0
+    - _Fullscreen_BlendMode: 1
+    - _Fullscreen_ColorBlendOperation: 0
+    - _Fullscreen_DepthTest: 2
+    - _Fullscreen_DepthWrite: 0
+    - _Fullscreen_DstAlphaBlend: 10
+    - _Fullscreen_DstColorBlend: 10
+    - _Fullscreen_SrcAlphaBlend: 1
+    - _Fullscreen_SrcColorBlend: 5
+    - _Fullscreen_Stencil: 1
+    - _Fullscreen_StencilComparison: 8
+    - _Fullscreen_StencilDepthFail: 0
+    - _Fullscreen_StencilFail: 0
+    - _Fullscreen_StencilPass: 0
+    - _Fullscreen_StencilReadMask: 255
+    - _Fullscreen_StencilReference: 0
+    - _Fullscreen_StencilWriteMask: 255
     - _Hatch_Texture_Count: 18
     - _Invert_Hatch_Colour: 0
     - _Invert_Strength: 3.1
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _SrcBlend: 5
+    - _Surface: 1
+    - _ZTest: 4
+    - _ZWrite: 0
+    - _ZWriteControl: 0
     m_Colors:
     - _Hatch_Texture_Tiling: {r: 8, g: 8, b: 0, a: 0}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!114 &6334730055634256588
 MonoBehaviour:
   m_ObjectHideFlags: 11
@@ -66,4 +108,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 5
+  version: 9

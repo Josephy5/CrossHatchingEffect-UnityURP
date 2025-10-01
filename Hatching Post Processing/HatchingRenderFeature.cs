@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -10,7 +10,7 @@ public class HatchingRenderFeature : ScriptableRendererFeature
     [System.Serializable]
     public class Settings
     {
-        public RenderPassEvent renderPassEvent = RenderPassEvent.AfterRenderingOpaques;
+        public RenderPassEvent renderPassEvent = RenderPassEvent.AfterRenderingSkybox;
         //the material that contains the hatching effect's shader, user must put in manually for now
         public Material material;
     }
@@ -29,20 +29,18 @@ public class HatchingRenderFeature : ScriptableRendererFeature
         }
         m_HatchingPass = new HatchingPass(settings.renderPassEvent, settings.material);
     }
+    
     //call and adds the hatching render pass to the scriptable renderer's queue
     public override void AddRenderPasses(ScriptableRenderer renderer, ref RenderingData renderingData)
     {
-        //camera color targets for the render pass
-        var src = renderer.cameraColorTarget;
-        var dest = RenderTargetHandle.CameraTarget;
-
-        if (settings.material == null)
-        {
-            Debug.LogWarning("No Hatching Material, Please input a material that has the hatching shader into the hatching effect's render feature setting");
-            return;
-        }
-        //passes the camera color targets to the render pass script
-        m_HatchingPass.Setup(src, dest);
         renderer.EnqueuePass(m_HatchingPass);
+    }
+
+    //setups the pass with the correct camera target at that period in the render pipline
+    //this is only exclusive for this effect, due to how its code/logic works
+    public override void SetupRenderPasses(ScriptableRenderer renderer, in RenderingData renderingData)
+    {
+        //old code
+        //m_HatchingPass.Setup(renderer);
     }
 }
