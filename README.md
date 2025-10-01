@@ -33,6 +33,8 @@ Inverted Hatching Color
 5. If needed, you can change the effect's render pass event in its render feature under settings.
 
 ## Credits/Assets used
-The code is based on IronStar Interactive's image effect shader tutorial. It has since been modified to run on Unity 6/Unity 6000.0.58f1 
+The code is based on IronStar Interactive's image effect shader tutorial. It has since been modified to run on Unity 6/Unity 6000.0.58f1.
+<br>
+<br>
 Image-Effects-with-Shadergraph by BattleDawnNZ/IronStar Interactive ([GitHub Link](https://github.com/BattleDawnNZ/Image-Effects-with-Shadergraph) or [YouTube Video Link](https://www.youtube.com/watch?v=FpvJAG6R99k&t=6s)). No License found
 
