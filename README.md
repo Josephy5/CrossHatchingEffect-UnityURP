@@ -1,12 +1,10 @@
 ![image_002_0001](https://github.com/user-attachments/assets/ee17a28f-8d2b-439c-b850-c393dc160405)
 
-<<<<<<< Updated upstream
 # Cross Hatching Effect Post Processing
 ![Unity Version](https://img.shields.io/badge/Unity-2021.3%36LTS%2B-blueviolet?logo=unity)
-=======
+
 # Hatching Post Processing
 ![Unity Version](https://img.shields.io/badge/Unity-6000.0.58%36LTS%2B-blueviolet?logo=unity)
->>>>>>> Stashed changes
 ![Unity Pipeline Support (Built-In)](https://img.shields.io/badge/BiRP_❌-darkgreen?logo=unity)
 ![Unity Pipeline Support (URP)](https://img.shields.io/badge/URP_✔️-blue?logo=unity)
 ![Unity Pipeline Support (HDRP)](https://img.shields.io/badge/HDRP_❌-darkred?logo=unity)
